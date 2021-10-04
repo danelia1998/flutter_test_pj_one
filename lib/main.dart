@@ -10,7 +10,7 @@ class PlanetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Planet App',
+      title: 'Animals',
       home: HomeScreen(),
     );
   }
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'https://styles.redditmedia.com/t5_j6lc8/styles/communityIcon_9uopq0bazux01.jpg';
                     });
                   },
-                  child: Text('Button 1'),
+                  child: Text('Fox'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       fixedSize: Size(150, 80),
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'https://i.pinimg.com/originals/b8/e2/88/b8e288afda86ecac45c7c61d64a084d1.jpg';
                     });
                   },
-                  child: Text('Button 2'),
+                  child: Text('Monkey'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       fixedSize: Size(150, 80),
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'https://pbs.twimg.com/profile_images/3629941932/e4df6aa0770252bd50b5ae8e5905adee.jpeg';
                     });
                   },
-                  child: Text('Button 3'),
+                  child: Text('Seal'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       fixedSize: Size(150, 80),
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'https://news.artnet.com/app/news-upload/2018/11/Badgers-in-tiny-cages-3-1-256x256.png';
                     });
                   },
-                  child: Text('Button 4'),
+                  child: Text('Skins'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       fixedSize: Size(150, 80),
