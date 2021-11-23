@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_pj_one/logic/logic.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  var counter =
-      "https://styles.redditmedia.com/t5_j6lc8/styles/communityIcon_9uopq0bazux01.jpg";
-
-  var descr =
-      "Red foxes have long snouts and red fur across the face, back, sides, and tail. Their throat, chin, and belly are grayish-white. Red foxes have black feet and black-tipped ears that are large and pointy. One of the most noticeable characteristics of the red fox is the fluffy white-tipped tail.";
-
-  @override
   Widget build(BuildContext context) {
+    final pictureChanger = Provider.of<PictureChanger>(context, listen: false);
     print('The build nethod is triggered');
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -30,8 +21,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    switchWithInt(counter),
-                    switchDescWithInt(descr),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Consumer<PictureChanger>(
+                        builder: (context, pictureChanger, child) => Image(
+                          height: 250,
+                          image: NetworkImage(pictureChanger.defaultPic),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                        height: 70,
+                        width: 250,
+                        child: Card(
+                          color: Colors.blue,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Consumer<PictureChanger>(
+                                  builder: (context, pictureChanger, child) =>
+                                      Text(
+                                    pictureChanger.defaultDescr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 14),
+                                  ),
+                                )),
+                          ),
+                        )),
                     SizedBox(
                         height: 120,
                         width: 260,
@@ -43,12 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://styles.redditmedia.com/t5_j6lc8/styles/communityIcon_9uopq0bazux01.jpg';
-                                      descr =
-                                          "Red foxes have long snouts and red fur across the face, back, sides, and tail. Their throat, chin, and belly are grayish-white. Red foxes have black feet and black-tipped ears that are large and pointy. One of the most noticeable characteristics of the red fox is the fluffy white-tipped tail.";
-                                    });
+                                    pictureChanger.setFox();
                                   },
                                   child: Text('Fox'),
                                   style: ElevatedButton.styleFrom(
@@ -60,12 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://i.pinimg.com/originals/b8/e2/88/b8e288afda86ecac45c7c61d64a084d1.jpg';
-                                      descr =
-                                          "Monkeys live in trees, grasslands, mountains, forests, and on high plains. A group of monkeys is called a troop. Most primates share six basic features: forward-facing eyes, eye sockets, grasping hands, nails, fingerprints, and large brains. Monkeys are most easily distinguished from apes by their tails.";
-                                    });
+                                    pictureChanger.setMonkey();
                                   },
                                   child: const Text('Monkey'),
                                   style: ElevatedButton.styleFrom(
@@ -82,12 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://pbs.twimg.com/profile_images/3629941932/e4df6aa0770252bd50b5ae8e5905adee.jpeg';
-                                      descr =
-                                          "Seals are semiaquatic marine mammals. They have four flippers, so are in a category of animals known as pinnipedia which means 'fin-footed'. ... Seals have a layer of fat under skin called blubber, which keeps them warm in cold water. Their slick fur coat is streamlined for gliding through water.";
-                                    });
+                                    pictureChanger.setSeal();
                                   },
                                   child: const Text('Seal'),
                                   style: ElevatedButton.styleFrom(
@@ -99,12 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://news.artnet.com/app/news-upload/2018/11/Badgers-in-tiny-cages-3-1-256x256.png';
-                                      descr =
-                                          "animal skin - the outer covering of an animal. animal product - a product made from animal material. lambskin, parchment, sheepskin - skin of a sheep or goat prepared for writing on. fell, hide - the dressed skin of an animal (especially a large animal)";
-                                    });
+                                    pictureChanger.setSkin();
                                   },
                                   child: const Text('Skins'),
                                   style: ElevatedButton.styleFrom(
@@ -128,8 +127,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     SizedBox(
                         child: Column(children: [
-                      switchWithInt(counter),
-                      switchDescWithInt(descr),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Consumer<PictureChanger>(
+                          builder: (context, pictureChanger, child) => Image(
+                            height: 250,
+                            image: NetworkImage(pictureChanger.defaultPic),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                          height: 70,
+                          width: 250,
+                          child: Card(
+                            color: Colors.blue,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Consumer<PictureChanger>(
+                                    builder: (context, pictureChanger, child) =>
+                                        Text(
+                                      pictureChanger.defaultDescr,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 14),
+                                    ),
+                                  )),
+                            ),
+                          )),
                     ])),
                     SizedBox(
                         height: 220,
@@ -142,12 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://styles.redditmedia.com/t5_j6lc8/styles/communityIcon_9uopq0bazux01.jpg';
-                                      descr =
-                                          "Red foxes have long snouts and red fur across the face, back, sides, and tail. Their throat, chin, and belly are grayish-white. Red foxes have black feet and black-tipped ears that are large and pointy. One of the most noticeable characteristics of the red fox is the fluffy white-tipped tail.";
-                                    });
+                                    pictureChanger.setFox();
                                   },
                                   child: const Text('Fox'),
                                   style: ElevatedButton.styleFrom(
@@ -159,12 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://i.pinimg.com/originals/b8/e2/88/b8e288afda86ecac45c7c61d64a084d1.jpg';
-                                      descr =
-                                          "Monkeys live in trees, grasslands, mountains, forests, and on high plains. A group of monkeys is called a troop. Most primates share six basic features: forward-facing eyes, eye sockets, grasping hands, nails, fingerprints, and large brains. Monkeys are most easily distinguished from apes by their tails.";
-                                    });
+                                    pictureChanger.setMonkey();
                                   },
                                   child: const Text('Monkey'),
                                   style: ElevatedButton.styleFrom(
@@ -181,12 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://pbs.twimg.com/profile_images/3629941932/e4df6aa0770252bd50b5ae8e5905adee.jpeg';
-                                      descr =
-                                          "Seals are semiaquatic marine mammals. They have four flippers, so are in a category of animals known as pinnipedia which means 'fin-footed'. ... Seals have a layer of fat under skin called blubber, which keeps them warm in cold water. Their slick fur coat is streamlined for gliding through water.";
-                                    });
+                                    pictureChanger.setSeal();
                                   },
                                   child: const Text('Seal'),
                                   style: ElevatedButton.styleFrom(
@@ -198,12 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      counter =
-                                          'https://news.artnet.com/app/news-upload/2018/11/Badgers-in-tiny-cages-3-1-256x256.png';
-                                      descr =
-                                          "animal skin - the outer covering of an animal. animal product - a product made from animal material. lambskin, parchment, sheepskin - skin of a sheep or goat prepared for writing on. fell, hide - the dressed skin of an animal (especially a large animal)";
-                                    });
+                                    pictureChanger.setSkin();
                                   },
                                   child: const Text('Skins'),
                                   style: ElevatedButton.styleFrom(

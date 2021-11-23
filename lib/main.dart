@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_pj_one/logic/logic.dart';
 import 'package:flutter_test_pj_one/screens/portrait/orientation_ui.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const PlanetApp());
@@ -10,9 +12,11 @@ class PlanetApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Animals',
-      home: HomeScreen(),
+      home: ChangeNotifierProvider<PictureChanger>(
+        create: (context) => PictureChanger(),
+        child: const HomeScreen()),
     );
   }
 }
